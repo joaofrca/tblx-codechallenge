@@ -39,16 +39,17 @@ npm install OR npm i
 Three environments exist within this project: DEV, TEST, PRD(TODO).
 In order to use the DEV environments and run the test files, one shall manually import the data into the MongoDB.
 
-On the folder's directory, navigate to ./dataset folder. There is a zip file which can also be found [here](https://codechallengestracc.blob.core.windows.net/code-challenge/dublin-dataset.zip), and two csv files:
+On the folder's directory, navigate to ./dataset folder. From the zip file which can be found [here](https://codechallengestracc.blob.core.windows.net/code-challenge/dublin-dataset.zip), download the 'siri.20130130.csv' file and add into the folder, making it two csv files:
 
 - siri.20130130.csv
 - siri.20130130-small-test.csv
 
-These files contain the dataset used for DEV and TEST environments, and were modified by adding a first row containing the header of the model/schema:
+These files contain the dataset used for DEV and TEST environments. A first line shall be added into 'siri.20130130.csv', containing the following header of the model/schema:
 
 ```
 timestamp,lineID,direction,journeyPatternID,timeframe,vehicleJourneyID,operator,congestion,lon,lat,delay,blockID,vehicleID,stopID,atStop
 ```
+The file 'siri.20130130-small-test.csv' already contains the above header.
 
 To load the data, one shall manually run, in the ./dataset path:
 
@@ -282,4 +283,4 @@ Download one extract, and from that extract, use 1 example CSV as input
 - Improve error handling.
 - Create Swagger documentation.
 
-# Made with ♡ in Lisbon
+# Made in Lisbon with ♡
