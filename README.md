@@ -136,6 +136,8 @@ Note: Do not forget to add data to the TEST environment as explained in step 2.
 
 # Examples
 
+Take a look at the examples below, and check swagger/tblx-codechallenge.yml file for swagger documentation.
+
 #### 1. localhost:4000/task1/:starttime/:endtime
 
 - starttime = 1354233601999999
@@ -282,6 +284,6 @@ Download one extract, and from that extract, use 1 example CSV as input
   - Unhappy flows on tests.
   - Tests on validators from service layer (busgpsDataValidator.test.js).
 - Improve error handling.
-- Create Swagger documentation.
+- Improve Swagger documentation.
 
 # Made in Lisbon with ♡
