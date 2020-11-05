@@ -93,31 +93,31 @@ Use Postman to try the application. Four routes are available:
 
 - get : [localhost:4000/task1/:starttime/:endtime](localhost:4000/task1/:starttime/:endtime)
   Requires keys:
-  - starttime
-  - endtime
+  - starttime (ISO 8601)
+  - endtime (ISO 8601)
 
 2. Given a time frame [start-time, end-time] and an Operator, what is the list of vehicle IDs?
 
 - get : [localhost:4000/task2/:starttime/:endtime/:operator](localhost:4000/task2/:starttime/:endtime/:operator)
   Requires keys:
-  - starttime
-  - endtime
+  - starttime (ISO 8601)
+  - endtime (ISO 8601)
   - operator
 
 3. Given a time frame [start-time, end-time] and a fleet, which vehicles are at a stop?
 
 - get : [localhost:4000/task3/:starttime/:endtime/:operator](localhost:4000/task3/:starttime/:endtime/:operator)
   Requires keys:
-  - starttime
-  - endtime
+  - starttime (ISO 8601)
+  - endtime (ISO 8601)
   - operator
 
 4. Given a time frame [start-time, end-time] and a vehicle, return the trace of that vehicle (GPS entries, ordered by timestamp).
 
 - get : [localhost:4000/task4/:starttime/:endtime/:vehicleID](localhost:4000/task4/:starttime/:endtime/:vehicleID)
   Requires keys:
-  - starttime
-  - endtime
+  - starttime (ISO 8601)
+  - endtime (ISO 8601)
   - vehicleID
 
 All Routes require the parameters in the Endpoint to be modified accordingly. No body required in the request.
@@ -140,61 +140,102 @@ Take a look at the examples below, and check swagger/tblx-codechallenge.yml file
 
 #### 1. localhost:4000/task1/:starttime/:endtime
 
-- starttime = 1354233601999999
-- endtime = 1354233602000001
+- starttime = 2012-11-30T00:00:01
+- endtime = 2012-11-30T00:10:00
   > expected result = {
               "result": [
-                  "CD",
                   "PO",
+                  "CD",
                   "HN",
                   "D2",
                   "RD",
                   "CF",
-                  "SL"
+                  "SL",
+                  "D1"
               ],
               "statusCode": 200
           }
 
 #### 2. localhost:4000/task2/:starttime/:endtime/:operator
 
-- starttime = 1354233601999999
-- endtime = 1354233602000001
-- operator = HN
+- starttime = 2012-11-30T00:00:01
+- endtime = 2012-11-30T00:10:00
+- operator = CD
   > expected result = {
             "result": [
-                33452,
-                33453,
-                33223,
-                33552,
-                43042,
+                38054,
+                33297,
+                33518,
+                33298,
+                33407,
+                43026,
+                43028,
+                33358,
+                33608,
+                33288,
+                33296,
+                33359,
+                33195,
+                38061,
+                33294,
+                43024,
+                38053
             ],
             "statusCode": 200
         };
 
 #### 3. localhost:4000/task3/:starttime/:endtime/:operator
 
-- starttime = 1354233601999999
-- endtime = 1354233602000001
+- starttime = 2012-11-30T00:00:01
+- endtime = 2012-11-30T00:10:00
 - operator = HN
   > expected result = {
             "result": [
-                33453,
-                33223
+                33359,
+                43024,
+                33407,
+                43028,
+                33296,
+                33288,
+                33298,
+                33294,
+                38054,
+                38061
             ],
             "statusCode": 200
         }
 
 #### 4. localhost:4000/task4/:starttime/:endtime/:vehicleID
 
-- starttime = 1354233601999999
-- endtime = 1354233602000001
-- vehicleID = 33223
+- starttime = 2012-11-30T00:00:01
+- endtime = 2012-11-30T00:10:00
+- vehicleID = 33298
   > expected result = {
             "result": [
                 {
-                    "timestamp": 1354233602000000,
-                    "lon": -6.2786,
-                    "lat": 53.417
+                    "timestamp": 1354233743000000,
+                    "lon": -6.378427,
+                    "lat": 53.319969
+                },
+                {
+                    "timestamp": 1354233822000000,
+                    "lon": -6.378461,
+                    "lat": 53.323204
+                },
+                {
+                    "timestamp": 1354233883000000,
+                    "lon": -6.382735,
+                    "lat": 53.326103
+                },
+                {
+                    "timestamp": 1354234102000000,
+                    "lon": -6.394721,
+                    "lat": 53.319584
+                },
+                {
+                    "timestamp": 1354234140000000,
+                    "lon": -6.395564,
+                    "lat": 53.317257
                 }
             ],
             "statusCode": 200
@@ -286,7 +327,7 @@ Download one extract, and from that extract, use 1 example CSV as input
 - Improve error handling.
 - Improve Swagger documentation.
 - Substitute starttime and endtime parameters by query string.
-&&
+  &&
 - Repeat all the challenge in Java with Spring MVC.
 
 # Made in Lisbon with ♡
