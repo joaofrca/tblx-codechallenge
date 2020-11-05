@@ -328,7 +328,7 @@ Download one extract, and from that extract, use 1 example CSV as input
 - Improve Swagger documentation.
 - Substitute starttime and endtime parameters by query string.
 - Add Facade layer.
-  &&
+AND
 - Repeat all the challenge in Java with Spring MVC.
 
 # Made in Lisbon with ♡
