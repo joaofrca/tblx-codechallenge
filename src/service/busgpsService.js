@@ -1,6 +1,7 @@
 
 const busgpsRepository = require('../repository/busgpsRepository');
 const busgpsDataValidator = require('./validators/busgpsDataValidator');
+const TimeValidator = require('./validators/timeValidator');
 const busgpsModel = require('../model/busgps');
 
 /**
@@ -8,8 +9,9 @@ const busgpsModel = require('../model/busgps');
  * @param {JSON} params 
  */
 async function getRunningOperators(params) {
-    busgpsDataValidator.validateTimeStampData(params);
+    TimeValidator.validateStartAndEndData(params.starttime, params.endtime);
     const query = getRunningOperatorsQuery(params);
+    TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let runningOperators = [];
     const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
@@ -82,6 +84,18 @@ function getBusGpsByQuery(query) {
 }
 
 /**
+ * Converts ISO 8601 datatimes to timestamp in microseconds.
+ * @param {String} datatime ISO 8601 format
+ */
+function convertDataToTimeStamp(datatime) {
+    const date = new Date(datatime);
+    const microseconds = date.getTime() * 1000;
+    console.log(microseconds);
+    console.log("joao2");
+    return microseconds;
+}
+
+/**
  * Removes duplicates.
  * @param {*} elem 
  * @param {*} index 
@@ -106,7 +120,7 @@ function increasingOrder(a, b) {
  */
 function getRunningOperatorsQuery(params) {
     return {
-        "timestamp": { "$gte": params.starttime, "$lte": params.endtime }
+        "timestamp": { "$gte": convertDataToTimeStamp(params.starttime), "$lte": convertDataToTimeStamp(params.endtime) }
     };
 }
 
@@ -116,7 +130,7 @@ function getRunningOperatorsQuery(params) {
  */
 function getVehiclesIDListQuery(params) {
     return {
-        "timestamp": { "$gte": params.starttime, "$lte": params.endtime },
+        "timestamp": { "$gte": convertDataToTimeStamp(params.starttime), "$lte": convertDataToTimeStamp(params.endtime) },
         "operator": params.operator
     };
 }
@@ -127,7 +141,7 @@ function getVehiclesIDListQuery(params) {
  */
 function getVehiclesAtStopQuery(params) {
     return {
-        "timestamp": { "$gte": params.starttime, "$lte": params.endtime },
+        "timestamp": { "$gte": convertDataToTimeStamp(params.starttime), "$lte": convertDataToTimeStamp(params.endtime) },
         "operator": params.operator
     };
 }
@@ -138,7 +152,7 @@ function getVehiclesAtStopQuery(params) {
  */
 function getVehicleTraceQuery(params) {
     return {
-        "timestamp": { "$gte": params.starttime, "$lte": params.endtime },
+        "timestamp": { "$gte": convertDataToTimeStamp(params.starttime), "$lte": convertDataToTimeStamp(params.endtime) },
         "vehicleID": params.vehicleID
     };
 }

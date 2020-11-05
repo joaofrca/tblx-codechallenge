@@ -279,6 +279,8 @@ Download one extract, and from that extract, use 1 example CSV as input
 # TODOs
 
 - Improve validations, specify by type and do not send params directly.
+- Separate validators by type.
+- Separate requests by type.
 - Improve tests:
   - Test DB should not be used and should be mocked.
   - Unhappy flows on tests.

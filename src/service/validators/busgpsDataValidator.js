@@ -1,17 +1,8 @@
-const TIMESTAMP_CHAIN = [validateNullOrEmpty, validateStartTimeProperty, validateStartTimeType, validateEndTimeProperty, validateEndTimeType];
 const OPERATOR_CHAIN = [validateNullOrEmpty, validateOperatorLength];
 const VEHICLEID_CHAIN = [validateNullOrEmpty, validateVehicleIDLength, validateVehicleIDType];
 
 const OPERATOR_LENGTH = 2;
 const VEHICLEID_LENGTH = 5;
-
-/**
- * Validates a TimeStamp data.
- * @param {JSON} data 
- */
-function validateTimeStampData(data) {
-    TIMESTAMP_CHAIN.forEach((validate) => validate(data));
-}
 
 /**
  * Validates an Operator data.
@@ -35,40 +26,6 @@ function validateVehicleIDData(data) {
  */
 function validateNullOrEmpty(data) {
     if (!data || data == null || data == undefined) throw createBadRequestError('Data cannot be null.');
-}
-
-/**
- * Validates if starttime exists.
- * @param {JSON} data 
- */
-function validateStartTimeProperty(data) {
-    if (!data.starttime) throw createBadRequestError('Endpoint must contain a starttime.');
-}
-
-/**
- * Validates starttime type.
- * @param {JSON} data 
- */
-function validateStartTimeType(data) {
-    const starttime = data.starttime;
-    validateDataType(starttime);
-}
-
-/**
- * Validates if endtime exists.
- * @param {JSON} data 
- */
-function validateEndTimeProperty(data) {
-    if (!data.endtime) throw createBadRequestError('Endpoint must contain a endtime.');
-}
-
-/**
- * Validates endtime type.
- * @param {JSON} data 
- */
-function validateEndTimeType(data) {
-    const endtime = data.endtime;
-    validateDataType(endtime);
 }
 
 /**
@@ -125,4 +82,4 @@ function createBadRequestError(msg) {
     return error;
 }
 
-module.exports = { validateTimeStampData, validateOperatorData, validateVehicleIDData };
+module.exports = { validateOperatorData, validateVehicleIDData };
