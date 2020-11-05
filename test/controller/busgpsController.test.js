@@ -7,10 +7,10 @@ const { expect } = chai;
 
 chai.use(chaiHTTP);
 
-describe('Test busgpsController: ', () => {
+describe('Test BusgpsController: ', () => {
     it('get -> getRunningOperators', (done) => {
-        const starttime = 1354233601999999;
-        const endtime = 1354233602000001;
+        const starttime = "2012-11-30T00:00:01";
+        const endtime = "2012-11-30T00:14:43";
         const expectation = {
             "result": [
                 "CD",
@@ -19,7 +19,8 @@ describe('Test busgpsController: ', () => {
                 "D2",
                 "RD",
                 "CF",
-                "SL"
+                "SL",
+                "D1"
             ],
             "statusCode": 200
         }
@@ -34,16 +35,29 @@ describe('Test busgpsController: ', () => {
     });
 
     it('get -> getVehiclesIDList', (done) => {
-        const starttime = 1354233601999999;
-        const endtime = 1354233602000001;
-        const operator = "HN";
+        const starttime = "2012-11-30T00:00:01";
+        const endtime = "2012-11-30T00:14:43";
+        const operator = "CD";
         const expectation = {
             "result": [
-                33452,
-                33453,
-                33223,
-                33552,
-                43042,
+                38054,
+                33518,
+                33298,
+                33297,
+                33407,
+                43026,
+                43028,
+                33358,
+                33608,
+                33288,
+                33296,
+                33359,
+                33195,
+                38061,
+                33294,
+                43024,
+                38053,
+                38062
             ],
             "statusCode": 200
         };
@@ -58,13 +72,22 @@ describe('Test busgpsController: ', () => {
     });
 
     it('get -> getVehiclesAtStop', (done) => {
-        const starttime = 1354233601999999;
-        const endtime = 1354233602000001;
-        const operator = "HN";
+        const starttime = "2012-11-30T00:00:01";
+        const endtime = "2012-11-30T00:14:43";
+        const operator = "CD";
         const expectation = {
             "result": [
-                33453,
-                33223
+                33359,
+                43024,
+                33407,
+                43028,
+                33296,
+                33288,
+                33298,
+                33294,
+                38054,
+                38061,
+                33518
             ],
             "statusCode": 200
         };
@@ -79,15 +102,20 @@ describe('Test busgpsController: ', () => {
     });
 
     it('get -> getVehicleTrace', (done) => {
-        const starttime = 1354233601999999;
-        const endtime = 1354233602000001;
-        const vehicleID = 33223;
+        const starttime = "2012-11-30T00:00:01";
+        const endtime = "2012-11-30T00:10:00";
+        const vehicleID = 43028;
         const expectation = {
             "result": [
                 {
-                    "timestamp": 1354233602000000,
-                    "lon": -6.2786,
-                    "lat": 53.417
+                    "timestamp": 1354233643000000,
+                    "lon": -6.412478,
+                    "lat": 53.321712
+                },
+                {
+                    "timestamp": 1354234198000000,
+                    "lon": -6.42835,
+                    "lat": 53.340199
                 }
             ],
             "statusCode": 200

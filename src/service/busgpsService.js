@@ -1,8 +1,9 @@
 
 const busgpsRepository = require('../repository/busgpsRepository');
-const busgpsDataValidator = require('./validators/busgpsDataValidator');
-const TimeValidator = require('./validators/timeValidator');
 const busgpsModel = require('../model/busgps');
+const TimeValidator = require('./validators/TimeValidator');
+const OperatorValidator = require('./validators/OperatorValidator');
+const VehicleIDValidator = require('./validators/VehicleIDValidator');
 
 /**
  * Validates input from @params, calls the repository query, and retrieves the list of Running Operators.
@@ -26,9 +27,10 @@ async function getRunningOperators(params) {
  * @param {JSON} params 
  */
 async function getVehiclesIDList(params) {
-    busgpsDataValidator.validateTimeStampData(params);
-    busgpsDataValidator.validateOperatorData(params);
+    TimeValidator.validateStartAndEndData(params.starttime, params.endtime);
+    OperatorValidator.validateOperatorData(params);
     const query = getVehiclesIDListQuery(params);
+    TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehiclesIDs = [];
     const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
@@ -43,9 +45,10 @@ async function getVehiclesIDList(params) {
  * @param {JSON} params 
  */
 async function getVehiclesAtStop(params) {
-    busgpsDataValidator.validateTimeStampData(params);
-    busgpsDataValidator.validateOperatorData(params);
+    TimeValidator.validateStartAndEndData(params.starttime, params.endtime);
+    OperatorValidator.validateOperatorData(params);
     const query = getVehiclesAtStopQuery(params);
+    TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehiclesAtStop = [];
     const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
@@ -60,9 +63,10 @@ async function getVehiclesAtStop(params) {
  * @param {JSON} params 
  */
 async function getVehicleTrace(params) {
-    busgpsDataValidator.validateTimeStampData(params);
-    busgpsDataValidator.validateVehicleIDData(params);
+    TimeValidator.validateStartAndEndData(params.starttime, params.endtime);
+    VehicleIDValidator.validateVehicleIDData(params);
     const query = getVehicleTraceQuery(params);
+    TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehicleTrace = [];
     const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
@@ -90,8 +94,6 @@ function getBusGpsByQuery(query) {
 function convertDataToTimeStamp(datatime) {
     const date = new Date(datatime);
     const microseconds = date.getTime() * 1000;
-    console.log(microseconds);
-    console.log("joao2");
     return microseconds;
 }
 

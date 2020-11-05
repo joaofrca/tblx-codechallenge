@@ -1,14 +1,14 @@
-const busgpsController = require('../controller/busgpsController');
+const BusgpsController = require('../controller/BusgpsController');
 
 const routes = (app) => {
     app.route('/task1/:starttime/:endtime')
-        .get(busgpsController.getRunningOperators);
+        .get(BusgpsController.getRunningOperators);
     app.route('/task2/:starttime/:endtime/:operator')
-        .get(busgpsController.getVehiclesIDList);
+        .get(BusgpsController.getVehiclesIDList);
     app.route('/task3/:starttime/:endtime/:operator')
-        .get(busgpsController.getVehiclesAtStop);
+        .get(BusgpsController.getVehiclesAtStop);
     app.route('/task4/:starttime/:endtime/:vehicleID')
-        .get(busgpsController.getVehicleTrace);
+        .get(BusgpsController.getVehicleTrace);
     //TODO ADD 404 ERROR ROUTE
     app.get('/', (req, res) =>
         res.send('Node and Express server runnig...')
