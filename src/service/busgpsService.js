@@ -1,6 +1,6 @@
 
-const busgpsRepository = require('../repository/busgpsRepository');
-const busgpsModel = require('../model/busgps');
+const BusgpsRepository = require('../repository/BusgpsRepository');
+const BusgpsModel = require('../model/Busgps');
 const TimeValidator = require('./validators/TimeValidator');
 const OperatorValidator = require('./validators/OperatorValidator');
 const VehicleIDValidator = require('./validators/VehicleIDValidator');
@@ -15,7 +15,7 @@ async function getRunningOperators(params) {
     TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let runningOperators = [];
-    const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
+    const busGpsEntries = await BusgpsRepository.getBusGpsByQuery(query)
     busGpsEntries.forEach(entry => {
         runningOperators.push(entry.operator);
     });
@@ -33,7 +33,7 @@ async function getVehiclesIDList(params) {
     TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehiclesIDs = [];
-    const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
+    const busGpsEntries = await BusgpsRepository.getBusGpsByQuery(query)
     busGpsEntries.forEach(entry => {
         vehiclesIDs.push(entry.vehicleID);
     });
@@ -51,7 +51,7 @@ async function getVehiclesAtStop(params) {
     TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehiclesAtStop = [];
-    const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
+    const busGpsEntries = await BusgpsRepository.getBusGpsByQuery(query)
     busGpsEntries.forEach(entry => {
         if (entry.atStop) vehiclesAtStop.push(entry.vehicleID);
     });
@@ -69,9 +69,9 @@ async function getVehicleTrace(params) {
     TimeValidator.validateStartIsBeforeEnd(query.timestamp.$gte, query.timestamp.$lte);
 
     let vehicleTrace = [];
-    const busGpsEntries = await busgpsRepository.getBusGpsByQuery(query)
+    const busGpsEntries = await BusgpsRepository.getBusGpsByQuery(query)
     busGpsEntries.forEach(entry => {
-        if (entry.atStop) vehicleTrace.push(busgpsModel.buildVehicleTrace(entry.timestamp, entry.lon, entry.lat));
+        if (entry.atStop) vehicleTrace.push(BusgpsModel.buildVehicleTrace(entry.timestamp, entry.lon, entry.lat));
     });
     return vehicleTrace.sort(increasingOrder);;
 }
@@ -84,7 +84,7 @@ module.exports = { getRunningOperators, getVehiclesIDList, getVehiclesAtStop, ge
 * @param {JSON} params 
 */
 function getBusGpsByQuery(query) {
-    return busgpsRepository.getBusGpsByQuery(query);
+    return BusgpsRepository.getBusGpsByQuery(query);
 }
 
 /**

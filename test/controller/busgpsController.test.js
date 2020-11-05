@@ -1,4 +1,4 @@
-const busgpsService = require('../../src/service/busgpsService');
+const busgpsService = require('../../src/service/BusgpsService');
 const { app } = require('../../app');
 
 const chai = require('chai');

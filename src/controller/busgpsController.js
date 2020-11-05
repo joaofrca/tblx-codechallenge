@@ -1,4 +1,4 @@
-const busgpsService = require('../service/busgpsService');
+const BusgpsService = require('../service/BusgpsService');
 const { logger } = require("../../configuration/loggerConfig");
 //err: any, req: Request<P, ResBody, ReqBody, ReqQuery>, res: Response<ResBody>, next: NextFunction
 
@@ -10,7 +10,7 @@ const { logger } = require("../../configuration/loggerConfig");
  */
 async function getRunningOperators(req, res, next) {
     try {
-        const operators = await busgpsService.getRunningOperators(req.params);
+        const operators = await BusgpsService.getRunningOperators(req.params);
         returnOK(res, operators);
     } catch (err) {
         next(err);
@@ -25,7 +25,7 @@ async function getRunningOperators(req, res, next) {
  */
 async function getVehiclesIDList(req, res, next) {
     try {
-        const vehiclesIDs = await busgpsService.getVehiclesIDList(req.params);
+        const vehiclesIDs = await BusgpsService.getVehiclesIDList(req.params);
         returnOK(res, vehiclesIDs);
     } catch (err) {
         next(err);
@@ -40,7 +40,7 @@ async function getVehiclesIDList(req, res, next) {
  */
 async function getVehiclesAtStop(req, res, next) {
     try {
-        const vehiclesAtStop = await busgpsService.getVehiclesAtStop(req.params);
+        const vehiclesAtStop = await BusgpsService.getVehiclesAtStop(req.params);
         returnOK(res, vehiclesAtStop);
     } catch (err) {
         next(err);
@@ -55,7 +55,7 @@ async function getVehiclesAtStop(req, res, next) {
  */
 async function getVehicleTrace(req, res, next) {
     try {
-        const vehicleTrace = await busgpsService.getVehicleTrace(req.params);
+        const vehicleTrace = await BusgpsService.getVehicleTrace(req.params);
         returnOK(res, vehicleTrace);
     } catch (err) {
         next(err);

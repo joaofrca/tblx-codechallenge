@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { BusGpsSchema } = require("../model/busgps");
+const { BusGpsSchema } = require("../model/Busgps");
 const BusGps = mongoose.model("BusGps", BusGpsSchema);
 
 /**
