@@ -130,5 +130,19 @@ describe('Test BusgpsController: ', () => {
             });
     });
 
-    //TODO: Unhappy flow tests
+    it('get -> error inserting URL', (done) => {
+        const starttime = "2012-11-30T00:00:01";
+        const endtime = "2012-11-30T00:14:43";
+        const expectation = "Not Found."
+
+        chai.request(app)
+            .get(`/task1/${starttime}/${endtime}/errorURL`)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.text).to.deep.include(expectation);
+                done();
+            });
+    });
+
+    //TODO: Add more Unhappy flow tests
 });

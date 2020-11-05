@@ -278,14 +278,15 @@ Download one extract, and from that extract, use 1 example CSV as input
 
 # TODOs
 
-- Improve validations, specify by type and do not send params directly.
-- Separate validators by type.
-- Separate requests by type.
+- Improve validations.
+- Separate requests/Controllers by type.
 - Improve tests:
   - Test DB should not be used and should be mocked.
   - Unhappy flows on tests.
-  - Tests on validators from service layer (busgpsDataValidator.test.js).
 - Improve error handling.
-- Improve Swagger documentation.
+- Improve Swagger documentation, correct examples.
+- Substitute starttime and endtime parameters by query string.
+&&
+- Repeat all the challenge in Java with Spring MVC.
 
 # Made in Lisbon with ♡
