@@ -282,9 +282,9 @@ Download one extract, and from that extract, use 1 example CSV as input
 - Separate requests/Controllers by type.
 - Improve tests:
   - Test DB should not be used and should be mocked.
-  - Unhappy flows on tests.
+  - More unhappy flows on tests.
 - Improve error handling.
-- Improve Swagger documentation, correct examples.
+- Improve Swagger documentation.
 - Substitute starttime and endtime parameters by query string.
 &&
 - Repeat all the challenge in Java with Spring MVC.

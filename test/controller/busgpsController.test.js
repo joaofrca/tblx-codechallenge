@@ -144,5 +144,4 @@ describe('Test BusgpsController: ', () => {
             });
     });
 
-    //TODO: Add more Unhappy flow tests
 });
