@@ -9,7 +9,6 @@ const routes = (app) => {
         .get(BusgpsController.getVehiclesAtStop);
     app.route('/task4/:starttime/:endtime/:vehicleID')
         .get(BusgpsController.getVehicleTrace);
-    //TODO ADD 404 ERROR ROUTE
     app.get('/', (req, res) =>
         res.send('Node and Express server runnig...')
     );
